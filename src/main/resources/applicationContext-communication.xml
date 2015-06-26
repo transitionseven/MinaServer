@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
-  http://www.springframework.org/schema/beans/spring-beans-3.2.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+  http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+  http://www.springframework.org/schema/util
+  http://www.springframework.org/schema/util/spring-util.xsd">
 
+    <import resource="applicationContext-activemq.xml"/>
 
     <bean id="propertyConfigurer"
           class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
@@ -32,7 +36,7 @@
         <property name="bindings">
             <list>
                 <bean class="org.apache.mina.integration.spring.Binding">
-                    <property name="address" value="${port}"/>
+                    <property name="address" value="${serverPort}"/>
                     <property name="handler" ref="serviceHandler"/>
                     <property name="serviceConfig">
                         <bean class="org.apache.mina.transport.socket.nio.SocketAcceptorConfig">
