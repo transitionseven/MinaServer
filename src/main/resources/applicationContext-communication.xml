@@ -102,11 +102,11 @@
              <bean class="org.apache.mina.filter.codec.textline.TextLineCodecFactory"/>
         </constructor-arg>
     </bean>
-
+    <!--解析命令-->
     <bean id="serverCommandFilter"
           class="com.zl.mina.filter.CommandFilter">
     </bean>
-
+    <!--解密-->
     <bean id="cryptographyFilter"
           class="com.zl.mina.filter.CryptographyFilter"/>
     <bean id="verificationFilter"
