@@ -123,9 +123,10 @@
     <bean id="serviceHandler"
           class="com.zl.mina.controller.ServerHandler">
     </bean>
-
+    <!--JMX支持-->
     <bean id="exporter" class="org.springframework.jmx.export.MBeanExporter">
         <property name="beans">
+            <!--管理的bean-->
             <map>
                 <entry key="communicationServer:name=ioHandler">
                     <ref local="serviceHandler"/>
@@ -137,6 +138,7 @@
         </property>
     </bean>
 
+    <!--服务管理器-->
     <bean id="mbeanServer"
           class="org.springframework.jmx.support.MBeanServerFactoryBean">
         <property name="locateExistingServerIfPossible" value="true"/>
