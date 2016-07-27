@@ -13,7 +13,17 @@ public class VerificationFilter extends IoFilterAdapter {
 
     @Override
     public void messageReceived(NextFilter nextFilter, IoSession session, Object message) throws Exception {
-        LOG.debug("校验");
+        LOG.debug("校验：" + message);
         nextFilter.messageReceived(session, message);
+    }
+
+    public void filterWrite(NextFilter nextFilter, IoSession session, WriteRequest writeRequest) throws Exception {
+        LOG.debug("校验：" +  writeRequest.getMessage());
+        nextFilter.filterWrite(session, writeRequest);
+    }
+
+    public void messageSent(NextFilter nextFilter, IoSession session, Object message) throws Exception {
+        nextFilter.messageSent(session, message);
+        LOG.debug("VerificationFilter:send message：" + message);
     }
 }

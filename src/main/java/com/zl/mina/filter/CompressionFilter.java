@@ -13,7 +13,17 @@ public class CompressionFilter extends IoFilterAdapter {
 
     @Override
     public void messageReceived(NextFilter nextFilter, IoSession session, Object message) throws Exception {
-        LOG.debug("压缩及编码");
+        LOG.debug("解压及解码：" + message);
         nextFilter.messageReceived(session, message);
+    }
+
+    public void filterWrite(NextFilter nextFilter, IoSession session, WriteRequest writeRequest) throws Exception {
+        LOG.debug("压缩及编码：" +  writeRequest.getMessage());
+        nextFilter.filterWrite(session, writeRequest);
+    }
+
+    public void messageSent(NextFilter nextFilter, IoSession session, Object message) throws Exception {
+        nextFilter.messageSent(session, message);
+        LOG.debug("CompressionFilter:send message：" + message);
     }
 }

@@ -91,7 +91,7 @@
         <constructor-arg index="4" type="java.util.concurrent.BlockingQueue">
             <bean class="java.util.concurrent.ArrayBlockingQueue">
                 <!--内存中任务队列容量，此容量需要大于最大线程数，但不宜过大 -->
-                <constructor-arg index="0" type="int" value="4000"/>
+                <constructor-arg index="0" type="int" value="2000"/>
             </bean>
         </constructor-arg>
     </bean>
@@ -109,6 +109,7 @@
     <!--解密-->
     <bean id="cryptographyFilter"
           class="com.zl.mina.filter.CryptographyFilter"/>
+    <!--校验-->
     <bean id="verificationFilter"
           class="com.zl.mina.filter.VerificationFilter"/>
     <!--压缩及编码-->
@@ -128,7 +129,7 @@
         <property name="beans">
             <!--管理的bean-->
             <map>
-                <entry key="communicationServer:name=ioHandler">
+                <entry key="communicationServer:name=zlHandler">
                     <ref local="serviceHandler"/>
                 </entry>
             </map>

@@ -23,13 +23,14 @@ public class ServerHandler extends IoHandlerAdapter {
     @Override
     public void messageReceived(IoSession session, Object message)
             throws Exception {
-        LOG.debug("服务端收到信息-------------");
-        LOG.debug(message);
-
+        LOG.debug("服务端收到信息：" + message);
+        String response = "HTTP/1.1 200 0K \\r\\nServer: my server\\r\\nContent-Type: text/html\\r\\nContent-Length:31\\r\\n\\r\\n<html><h1>It works!</h1></html>\\r\\n";
+        LOG.debug("服务端发送消息：" + message);
+        session.write(response);
     }
     @Override
     public void messageSent(IoSession session, Object message) throws Exception {
-        LOG.debug("------服务端发消息到客户端------");
+        LOG.debug("ServerHandler:send message：" + message);
     }
 
     @Override

@@ -14,7 +14,17 @@ public class CryptographyFilter  extends IoFilterAdapter {
     @Override
     public void messageReceived(NextFilter nextFilter, IoSession session, Object message)
             throws Exception {
-        LOG.debug("加解密");
+        LOG.debug("解密数据：" + message);
         nextFilter.messageReceived(session, message);
+    }
+
+    public void filterWrite(NextFilter nextFilter, IoSession session, WriteRequest writeRequest) throws Exception {
+        LOG.debug("加密数据：" +  writeRequest.getMessage());
+        nextFilter.filterWrite(session, writeRequest);
+    }
+
+    public void messageSent(NextFilter nextFilter, IoSession session, Object message) throws Exception {
+        nextFilter.messageSent(session, message);
+        LOG.debug("CryptographyFilter:send message：" + message);
     }
 }
