@@ -120,17 +120,22 @@
     <bean id="xmlBeanBindingFilter"
           class="com.zl.mina.filter.XmlBeanBindingFilter">
     </bean>
-
+    <!--业务处理-->
     <bean id="serviceHandler"
           class="com.zl.mina.controller.ServerHandler">
     </bean>
+    <bean id="htmlAdapter" class="com.sun.jdmk.comm.HtmlAdaptorServer"/>
+
     <!--JMX支持-->
     <bean id="exporter" class="org.springframework.jmx.export.MBeanExporter">
         <property name="beans">
             <!--管理的bean-->
             <map>
-                <entry key="communicationServer:name=zlHandler">
+                <entry key="communicationServer:name=serviceHandler">
                     <ref local="serviceHandler"/>
+                </entry>
+                <entry key="agent:name=htmlAdapter,port=8808">
+                    <ref local="htmlAdapter"/>
                 </entry>
             </map>
         </property>
